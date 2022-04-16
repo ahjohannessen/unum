@@ -3,8 +3,9 @@ import deps._
 Global / onChangedBuildSource := ReloadOnSourceChanges
 Global / lintUnusedKeysOnLoad := false
 
-lazy val Scala2 = "2.13.8"
-lazy val Scala3 = "3.1.2"
+lazy val Scala2       = "2.13.8"
+lazy val Scala3       = "3.1.2"
+lazy val Scala3Output = "3.0.2"
 
 lazy val root = project
   .in(file("."))
@@ -24,6 +25,12 @@ inThisBuild(
   List(
     scalaVersion := Scala3,
     crossScalaVersions := Seq(Scala3, Scala2),
+    scalaOutputVersion := {
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((3, _)) => Scala3Output
+        case _            => scalaVersion.value
+      }
+    },
     tlJdkRelease := Some(8),
     tlBaseVersion := "1.0",
     tlSonatypeUseLegacyHost := false,
