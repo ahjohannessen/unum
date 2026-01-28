@@ -25,7 +25,7 @@ inThisBuild(
     scalaVersion := Scala3,
     crossScalaVersions := Seq(Scala3),
     tlJdkRelease := Some(jdkRelease),
-    mimaFailOnProblem := false,
+    mimaFailOnProblem := true,
     tlBaseVersion := "1.4",
     mergifyStewardConfig ~= { _.map(_.withMergeMinors(true).withAuthor("scala-steward-ahjohannessen[bot]")) },
     organization := "io.github.ahjohannessen",
